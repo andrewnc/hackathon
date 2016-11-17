@@ -1,0 +1,33 @@
+<head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<style type="text/css">
+.moved{
+    float: right;
+    top: -34px;
+    left: 55px;
+    position: relative;
+}
+
+.main-label{
+    text-align: right;
+    margin-bottom: 75px;
+}
+
+</style>
+</head>
+
+
+<div class='container' style="padding-top:100px;">
+	<div class='row'>
+		<div class='col-md-3 col-md-offset-4'>
+			<h2 class="main-label">Write Something:</h2>
+			<form action="info/" method="post">
+				{% csrf_token %}
+			    <input id="text_input" type="text" name="text_input" placeholder="Enter some text" class='form-control'>
+			    <input type="submit" value="OK" class="btn btn-primary moved">
+			</form>
+		</div>
+	</div>
+</div>
