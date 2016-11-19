@@ -44,4 +44,4 @@ def T(x_shift=None, y_shift=None):
             li.append(write_latex(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]))
         else:
             continue
-    return li, final_x
+    return li, final_x, final_y
