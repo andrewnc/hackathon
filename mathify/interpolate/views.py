@@ -13,7 +13,7 @@ def index(request):
 def landing_render(request):
 	return render(request, 'app/landing.html')
 
-def prepareLatex(text):
+def prepareLatex(text, sillify=False):
 	"""Take the text and prepare it to be graphed in a Latex format.
 		Parameters:
 		text (str): The text we are wanting to graph. V.0 only allows basic characters
@@ -28,7 +28,7 @@ def prepareLatex(text):
 			letters.append(character)
 			character, x_shift, y_shift = draw.char(c+c, x_shift, 0)
 		else:
-			character, x_shift, y_shift = draw.char(c, x_shift, 0)
+			character, x_shift, y_shift = draw.char(c, x_shift, 0, sillify)
 		x_shift += 25 #add a bit of a buffer between characters.
 		letters.append(character)
 	return letters
@@ -39,7 +39,8 @@ def getFormData(request):
         form = NameForm(request.POST)
 
     text = form['text_input'].value()
+    sillify = form['silly'].value()
 
-    letters = prepareLatex(text)
+    letters = prepareLatex(text, sillify)
 
     return render(request, 'app/name.html', {'text': text, 'letters': letters})
