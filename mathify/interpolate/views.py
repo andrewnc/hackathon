@@ -17,7 +17,7 @@ def drawT(shift=None):
 	li = []
 	for a in coords:
 		if len(a) == 8:
-			li.append("\\left(\\left(" + a[0] + "\\left(1-t\\right)^3+3*" + a[1] + "\\left(1-t\\right)^2t+3*" + a[2] + "\\left(1-t\\right)t^2+" + a[3] + "t^3\\right),\\ " + a[4] + "\\left(1-t\\right)^3+3*" + a[5] + "\\left(1-t\\right)^2t+3*" + a[6] + "\\left(1-t\\right)t^2+" + a[7] + "t^3\\right)")
+			li.append("\\\\left(\\\\left(" + a[0] + "\\\\left(1-t\\\\right)^3+3*" + a[1] + "\\\\left(1-t\\\\right)^2t+3*" + a[2] + "\\\\left(1-t\\\\right)t^2+" + a[3] + "t^3\\\\right),\\\\ " + a[4] + "\\\\left(1-t\\\\right)^3+3*" + a[5] + "\\\\left(1-t\\\\right)^2t+3*" + a[6] + "\\\\left(1-t\\\\right)t^2+" + a[7] + "t^3\\\\right)")
 		else:
 			continue
 	return li

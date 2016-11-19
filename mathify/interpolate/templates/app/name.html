@@ -11,6 +11,13 @@
 		<div class='col-md-6 col-md-offset-2' style='text-align:center;'>
 			<h2 style="position:relative;left:92px;">{{text}}</h2>
 			<div id="calculator" style="width: 600px; height: 400px;"></div>
+			<div>{% for l in letters %}
+			{% for c in l %}
+				{{c}}
+				Break
+			{% endfor %}
+			{% endfor %}
+			</div>
 			<script>
 			  var elt = document.getElementById('calculator');
 			  var calculator = Desmos.Calculator(elt, {expressions: true, settingsMenu: false, zoomButtons: true, border: true});
@@ -34,7 +41,16 @@
 				calculator.setExpression({id:'graph8', latex:"y=2.5\\ \\left\\{2.5\\le x\\le 4.5\\right\\}", color:"#000000"})
 				calculator.setExpression({id:'graph9', latex:"x=3.5\\ \\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
 				*/
-
+				/*for (i = 0; i < {{letters}}.length; i++) {
+					for (j = 0; j < {{letters}}[i].length; j++) {
+						calculator.setExpression({id:'graph'+i, latex:{{letters}}[i][j], color:"#000000"})
+					}
+				}*/
+				{% for l in letters %}
+					{% for c in l %}
+						calculator.setExpression({latex:"{{c}}", color:"#000000"})
+					{% endfor %}
+				{% endfor %}
 				calculator.setExpression({id:'graph1', latex:"\\left(\\left(x_1\\left(1-t\\right)^3+3x_2\\left(1-t\\right)^2t+3x_3\\left(1-t\\right)t^2+x_4t^3\\right),\\ y_1\\left(1-t\\right)^3+3y_2\\left(1-t\\right)^2t+3y_3\\left(1-t\\right)t^2+y_4t^3\\right)", color:"#000000"})
 			</script>
 			<!--https://www.desmos.com/api/v0.7/docs/index.html#document-quickstart -->
