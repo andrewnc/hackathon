@@ -10,42 +10,11 @@
 	<div class='row'>
 		<div class='col-md-6 col-md-offset-2' style='text-align:center;'>
 			<h2 style="position:relative;left:92px;">{{text}}</h2>
-			<div id="calculator" style="width: 600px; height: 400px;"></div>
-			<div>{% for l in letters %}
-			{% for c in l %}
-				{{c}}
-				Break
-			{% endfor %}
-			{% endfor %}
-			</div>
+			<div id="calculator" style="width: 800px; height: 400px;"></div>
 			<script>
 			  var elt = document.getElementById('calculator');
-			  var calculator = Desmos.Calculator(elt, {expressions: true, settingsMenu: false, zoomButtons: true, border: true});
-				calculator.setMathBounds({left: -5, right: 5, bottom: -5, top: 5});
-
-				/*
-				calculator.setExpression({id:'graph1', latex:"y=\\sum _{k=0}^n \\operatorname{nCr}\\left(n,k\\right)x^k(1-x)^{n-k}\\left\\{0\\le x\\le 1\\right\\}", color: "#000000"});
-				calculator.setExpression({id:'slider1', latex:"n=13", sliderBounds: { min: 2, max: 15, step: 1}});
-				calculator.setExpression({id:'graph2', latex:"y=\\operatorname{nCr}\\left(n,i\\right)x^i(1-x)^{n-i}", color: "#000000"});
-				calculator.setExpression({id:'slider2', latex:"i=3", sliderBounds: { min: 2, max: 12, step: 1}})
-				*/
-
-				/*
-				calculator.setExpression({id:'graph1', latex:"y=2.5\\ \\left\\{-4.5\\ \\le x\\le -2.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph2', latex:"x=-3.5\\ \\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph3', latex:"y\\ =\\ 2.5\\ \\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph4', latex:"y\\ =\\ 1.5\\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph5', latex:"y\\ =\\ 0.5\\ \\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph6', latex:"x=-2\\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph7', latex:"x=.8\\sin \\left(3y-1.5\\right)\\ +1.3\\ \\left\\{.5\\le y\\le 2.8\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph8', latex:"y=2.5\\ \\left\\{2.5\\le x\\le 4.5\\right\\}", color:"#000000"})
-				calculator.setExpression({id:'graph9', latex:"x=3.5\\ \\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
-				*/
-				/*for (i = 0; i < {{letters}}.length; i++) {
-					for (j = 0; j < {{letters}}[i].length; j++) {
-						calculator.setExpression({id:'graph'+i, latex:{{letters}}[i][j], color:"#000000"})
-					}
-				}*/
+			  var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
+				calculator.setMathBounds({left: -10, right: 3600, bottom: -10, top: 1800});
 				{% for l in letters %}
 					{% for c in l %}
 						calculator.setExpression({latex:"{{c}}", color:"#000000"})

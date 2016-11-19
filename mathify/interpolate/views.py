@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from .forms import NameForm
+import math_letters as draw
 # Create your views here.
 
 def index(request):
@@ -11,21 +12,16 @@ def index(request):
 def landing_render(request):
 	return render(request, 'app/landing.html')
 
-def drawT(shift=None):
-	#TODO: Handle proper Shifting for characters
-	coords = [["237","620","237","620","237","120","237","120"],["237","120","237","35","226","24","143","19"],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
-	li = []
-	for a in coords:
-		if len(a) == 8:
-			li.append("\\\\left(\\\\left(" + a[0] + "\\\\left(1-t\\\\right)^3+3*" + a[1] + "\\\\left(1-t\\\\right)^2t+3*" + a[2] + "\\\\left(1-t\\\\right)t^2+" + a[3] + "t^3\\\\right),\\\\ " + a[4] + "\\\\left(1-t\\\\right)^3+3*" + a[5] + "\\\\left(1-t\\\\right)^2t+3*" + a[6] + "\\\\left(1-t\\\\right)t^2+" + a[7] + "t^3\\\\right)")
-		else:
-			continue
-	return li
-
-def drawChar(c):
+def drawChar(c, x_shift, y_shift=0):
+	"""NOTE: When building characters make sure that the coordinates are set up
+	to have [x1,y1,x2,y2,x3,y3,x4,y4]
+	Parameters:
+	c (str): The character to be drawn
+	x_shift (int): the amount of horizontal shift needed.
+	y_shift (int): The amount of vertical shift needed.
+	"""
 	if c == 'T':
-		print "Calling drawT"
-		return drawT()
+		return draw.T(x_shift, y_shift)
 	else:
 		return "None"
 
@@ -36,9 +32,12 @@ def prepareLatex(text):
 		Returns:
 		letters (list): Each letter is an element of the list returned by this function."""
 	letters = []
+	x_shift = 0
+	y_shift = 0 #TODO: Handle long sentences with wrapping somehow.
 	for c in text:
-		print "attempting to draw",c
-		letters.append(drawChar(c))
+		character, x_shift = drawChar(c, x_shift, y_shift)
+		x_shift += 25 #add a bit of a buffer between characters.
+		letters.append(character)
 	return letters
 
 
