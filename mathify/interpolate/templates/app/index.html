@@ -1,5 +1,12 @@
 <!doctype html>
 <head>
+<script src="https://www.desmos.com/api/v0.7/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/databases-2/512/function-512.png">
@@ -17,14 +24,35 @@
     margin-bottom: 75px;
 }
 
+.off-label{
+    text-align: center;
+}
+
 </style>
 </head>
 
+<nav class="navbar navbar-default">
+ <div class="container-fluid">
+   <!-- Brand and toggle get grouped for better mobile display -->
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+     <a class="navbar-brand" href="/landing/">MATHIFY</a>
+   </div>
+
+
+   </div><!-- /.navbar-collapse -->
+ </div><!-- /.container-fluid -->
+</nav>
 
 <div class='container' style="padding-top:100px;">
 	<div class='row'>
 		<div class='col-md-3 col-md-offset-4'>
-			<h2 class="main-label">Write Something:</h2>
+			<h2 class="main-label">Try Mathifying your name!</h2>
 			<form action="info/" method="post">
 				{% csrf_token %}
 			    <input id="text_input" type="text" name="text_input" placeholder="Enter some text" class='form-control'>
@@ -32,4 +60,27 @@
 			</form>
 		</div>
 	</div>
+    <div class='row'>
+        <h2 class="off-label">Here's what "Math" looks like!</h2>
+        <div id="calculator" style="width: 800px; height: 400px;"></div>
+        <div id="math_latex" class='row'>
+            <h2>Your text has been Mathified<span class="caret"></span></h2>
+    		$$
+    	</div>
+    	<script>
+    	var latex_div = document.getElementById('math_latex');
+    	var elt = document.getElementById('calculator');
+    	var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
+    	calculator.setMathBounds({left: -3500, right: 6500, bottom: -2000, top: 3000});
+    	{% for l in letters %}
+    		{% for c in l %}
+    			calculator.setExpression({latex:"{{c}}", color:"#000000"});
+    			test = "{{c}}";
+    			test = test.replace(/\.[^\(|^t]*/g, "");
+    			latex_div.innerHTML += test + "\\\\";
+    		{% endfor %}
+    	{% endfor %}
+    	latex_div.innerHTML += "$$"
+    	</script>
+    </div>
 </div>
