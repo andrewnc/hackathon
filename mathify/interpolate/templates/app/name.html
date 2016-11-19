@@ -24,34 +24,37 @@
       <a class="navbar-brand" href="/landing/">MATHIFY</a>
     </div>
 
-   
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
 
 <div class='container' style="padding-top:100px;">
-	<div class='row'>
+	<div id="main" class='row'>
 		<div class='col-md-6 col-md-offset-2' style='text-align:center;'>
 			<div id="calculator" style="width: 800px; height: 400px;"></div>
 		</div>
-	</div>
-	<div id="math_latex" class='row'>
-		<h2>Your text has been Mathified<span class="caret"></span></h2>
-		$$
+		<div id="math_latex" class='row'>
+			<h2>Your text has been Mathified<span class="caret"></span></h2>
+		</div>
 	</div>
 	<script>
-	var latex_div = document.getElementById('math_latex');
+	var main = document.getElementById('main');
 	var elt = document.getElementById('calculator');
 	var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
 	calculator.setMathBounds({left: -3500, right: 6500, bottom: -2000, top: 3000});
 	{% for l in letters %}
+		my_div = document.createElement('div');
+		my_div.innerHTML = '$$';
 		{% for c in l %}
 			calculator.setExpression({latex:"{{c}}", color:"#000000"});
-			test = "{{c}}";
-			test = test.replace(/\.[^\(|^t]*/g, "");
-			latex_div.innerHTML += test + "\\\\";
+			var line = "{{c}}";
+			line = line.replace(/\.[^\(|^t]*/g, "");
+			my_div.innerHTML += line + "\\\\";
 		{% endfor %}
+		my_div.innerHTML += "$$";
+		main.appendChild(my_div);
 	{% endfor %}
 	latex_div.innerHTML += "$$"
 	</script>
