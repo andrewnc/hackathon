@@ -7,7 +7,7 @@ import math_letters as draw
 # Create your views here.
 
 def index(request):
-	letters = prepareLatex("Math")
+	letters = prepareLatex("Mathify")
 	return render(request, 'app/index.html', {'letters': letters})
 
 def landing_render(request):
@@ -23,7 +23,12 @@ def prepareLatex(text):
 	x_shift = 0
 	y_shift = 0 #TODO: Handle long sentences with wrapping somehow.
 	for c in text:
-		character, x_shift, y_shift = draw.char(c, x_shift, 0)
+		if c == 'g' or c == 'G' or c == 's' or c == 'S':
+			character, discard, discard = draw.char(c, x_shift, 0)
+			letters.append(character)
+			character, x_shift, y_shift = draw.char(c+c, x_shift, 0)
+		else:
+			character, x_shift, y_shift = draw.char(c, x_shift, 0)
 		x_shift += 25 #add a bit of a buffer between characters.
 		letters.append(character)
 	return letters
