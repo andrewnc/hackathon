@@ -12,19 +12,6 @@ def index(request):
 def landing_render(request):
 	return render(request, 'app/landing.html')
 
-def drawChar(c, x_shift, y_shift=0):
-	"""NOTE: When building characters make sure that the coordinates are set up
-	to have [x1,y1,x2,y2,x3,y3,x4,y4]
-	Parameters:
-	c (str): The character to be drawn
-	x_shift (int): the amount of horizontal shift needed.
-	y_shift (int): The amount of vertical shift needed.
-	"""
-	if c == 'T':
-		return draw.T(x_shift, y_shift)
-	else:
-		return None, x_shift, y_shift
-
 def prepareLatex(text):
 	"""Take the text and prepare it to be graphed in a Latex format.
 		Parameters:
@@ -35,7 +22,7 @@ def prepareLatex(text):
 	x_shift = 0
 	y_shift = 0 #TODO: Handle long sentences with wrapping somehow.
 	for c in text:
-		character, x_shift, y_shift = drawChar(c, x_shift, y_shift)
+		character, x_shift, y_shift = draw.char(c, x_shift, y_shift)
 		x_shift += 25 #add a bit of a buffer between characters.
 		letters.append(character)
 	return letters
