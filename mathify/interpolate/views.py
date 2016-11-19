@@ -8,6 +8,9 @@ from .forms import NameForm
 def index(request):
 	return render(request, 'app/index.html')
 
+def landing_render(request):
+	return render(request, 'app/landing.html')
+
 def drawT(shift=None):
 	#TODO: Handle proper Shifting for characters
 	coords = [["237","620","237","620","237","120","237","120"],["237","120","237","35","226","24","143","19"],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
