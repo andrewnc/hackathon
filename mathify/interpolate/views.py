@@ -23,7 +23,7 @@ def drawChar(c, x_shift, y_shift=0):
 	if c == 'T':
 		return draw.T(x_shift, y_shift)
 	else:
-		return "None"
+		return "None", x_shift, y_shift
 
 def prepareLatex(text):
 	"""Take the text and prepare it to be graphed in a Latex format.
