@@ -1,4 +1,6 @@
 <head>
+<script src="https://www.desmos.com/api/v0.7/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
@@ -8,8 +10,44 @@
 	<div class='row'>
 		<div class='col-md-6 col-md-offset-2' style='text-align:center;'>
 			<h2 style="position:relative;left:92px;">{{text}}</h2>
+			<div id="calculator" style="width: 600px; height: 400px;"></div>
+			<script>
+			  var elt = document.getElementById('calculator');
+			  var calculator = Desmos.Calculator(elt, {expressions: true, settingsMenu: false, zoomButtons: true, border: true});
+				calculator.setMathBounds({left: -5, right: 5, bottom: -5, top: 5});
 
-			<iframe src="https://www.desmos.com/calculator" height="600" width="800" style="border:none;"> </iframe>
+				/*
+				calculator.setExpression({id:'graph1', latex:"y=\\sum _{k=0}^n \\operatorname{nCr}\\left(n,k\\right)x^k(1-x)^{n-k}\\left\\{0\\le x\\le 1\\right\\}", color: "#000000"});
+				calculator.setExpression({id:'slider1', latex:"n=13", sliderBounds: { min: 2, max: 15, step: 1}});
+				calculator.setExpression({id:'graph2', latex:"y=\\operatorname{nCr}\\left(n,i\\right)x^i(1-x)^{n-i}", color: "#000000"});
+				calculator.setExpression({id:'slider2', latex:"i=3", sliderBounds: { min: 2, max: 12, step: 1}})
+				*/
+
+				/*
+				calculator.setExpression({id:'graph1', latex:"y=2.5\\ \\left\\{-4.5\\ \\le x\\le -2.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph2', latex:"x=-3.5\\ \\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph3', latex:"y\\ =\\ 2.5\\ \\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph4', latex:"y\\ =\\ 1.5\\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph5', latex:"y\\ =\\ 0.5\\ \\left\\{-2\\le x\\le -.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph6', latex:"x=-2\\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph7', latex:"x=.8\\sin \\left(3y-1.5\\right)\\ +1.3\\ \\left\\{.5\\le y\\le 2.8\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph8', latex:"y=2.5\\ \\left\\{2.5\\le x\\le 4.5\\right\\}", color:"#000000"})
+				calculator.setExpression({id:'graph9', latex:"x=3.5\\ \\left\\{0.5\\le y\\le 2.5\\right\\}", color:"#000000"})
+				*/
+
+				calculator.setExpression({id:'graph1', latex:"\\left(\\left(x_1\\left(1-t\\right)^3+3x_2\\left(1-t\\right)^2t+3x_3\\left(1-t\\right)t^2+x_4t^3\\right),\\ y_1\\left(1-t\\right)^3+3y_2\\left(1-t\\right)^2t+3y_3\\left(1-t\\right)t^2+y_4t^3\\right)", color:"#000000"})
+			</script>
+			<!--https://www.desmos.com/api/v0.7/docs/index.html#document-quickstart -->
+			<!--iframe src="https://www.desmos.com/calculator" height="600" width="800" style="border:none;"> </iframe>-->
 		</div>
 	</div>
 </div>
+
+<!--
+
+y = \sum_{i=0}^n
+{n \choose i}
+f\big(\frac{i}{n}\big)
+x^i(1-x)^{n-i}\\
+
+-->
