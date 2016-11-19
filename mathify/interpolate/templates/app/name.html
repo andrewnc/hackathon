@@ -27,15 +27,13 @@
 	var latex_div = document.getElementById('math_latex');
 	var elt = document.getElementById('calculator');
 	var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
-	calculator.setMathBounds({left: -10, right: 7200, bottom: -10, top: 3600});
+	calculator.setMathBounds({left: -3500, right: 6500, bottom: -2000, top: 3000});
 	{% for l in letters %}
 		{% for c in l %}
 			calculator.setExpression({latex:"{{c}}", color:"#000000"});
 			test = "{{c}}";
-			console.log(test)
 			test = test.replace(/\.[^\(|^t]*/g, "");
-			console.log(test)
-			latex_div.innerHTML = "$$" + test + "\\\\";
+			latex_div.innerHTML += test + "\\\\";
 		{% endfor %}
 	{% endfor %}
 	latex_div.innerHTML += "$$"
