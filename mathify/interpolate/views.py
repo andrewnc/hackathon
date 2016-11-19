@@ -22,7 +22,7 @@ def prepareLatex(text):
 	x_shift = 0
 	y_shift = 0 #TODO: Handle long sentences with wrapping somehow.
 	for c in text:
-		character, x_shift, y_shift = draw.char(c, x_shift, y_shift)
+		character, x_shift, y_shift = draw.char(c, x_shift, 0)
 		x_shift += 25 #add a bit of a buffer between characters.
 		letters.append(character)
 	return letters
@@ -35,6 +35,5 @@ def getFormData(request):
     text = form['text_input'].value()
 
     letters = prepareLatex(text)
-    #print(latexs[0][0])
-    #print(latexs[0][1])
+
     return render(request, 'app/name.html', {'text': text, 'letters': letters})

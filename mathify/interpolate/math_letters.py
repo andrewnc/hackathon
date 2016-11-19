@@ -29,10 +29,9 @@ def write_latex(x1,y1,x2,y2,x3,y3,x4,y4):
 
 def template_letter(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
-    Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each curve is a list inside coords.
+    Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[],[],[],[],[],[]]
-    #T was extra special, it needs to be scaled up to 600/700
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
 
     #Scale must occur before shift.
@@ -58,7 +57,9 @@ def char(c, x_shift, y_shift=0):
     x_shift (int): the amount of horizontal shift needed.
     y_shift (int): The amount of vertical shift needed.
     """
-    if c == 'T':
+    if c == "A":
+        return A(x_shift, y_shift)
+    elif c == 'T':
         return T(x_shift, y_shift)
     else:
         return None, x_shift, y_shift
@@ -67,8 +68,7 @@ def A(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each curve is a list inside coords.
     Also that the numbers are input as integers"""
-    coords = [[0,0,260,700,0,0,260,700],[260,700,380,700,260,700,380,700],[380,700,635,0,380,700,635,0],[635,0,530,0,635,0,530,0],[],[]]
-    #T was extra special, it needs to be scaled up to 600/700
+    coords = [[0,0,260,700,0,0,260,700],[260,700,380,700,260,700,380,700],[380,700,635,0,380,700,635,0],[635,0,535,0,635,0,535,0],[535,0,455,200,535,0,455,200],[455,200,175,200,455,200,175,200],[175,200,100,0,175,200,100,0],[100,0,0,0,100,0,0,0],[211,300,322,600,211,300,322,600],[322,600,433,300,322,600,433,300],[211,300,422,300,211,300,422,300]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
 
     #Scale must occur before shift.
