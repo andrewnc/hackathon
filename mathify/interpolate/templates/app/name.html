@@ -1,5 +1,11 @@
 <head>
 <script src="https://www.desmos.com/api/v0.7/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
 <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/databases-2/512/function-512.png">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -12,17 +18,26 @@
 		<div class='col-md-6 col-md-offset-2' style='text-align:center;'>
 			<h2 style="position:relative;left:92px;">{{text}}</h2>
 			<div id="calculator" style="width: 800px; height: 400px;"></div>
-			<script>
-			  var elt = document.getElementById('calculator');
-			  var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
-				calculator.setMathBounds({left: -10, right: 7200, bottom: -10, top: 3600});
-				{% for l in letters %}
-					{% for c in l %}
-						calculator.setExpression({latex:"{{c}}", color:"#000000"})
-					{% endfor %}
-				{% endfor %}
-				calculator.setExpression({id:'graph1', latex:"\\left(\\left(x_1\\left(1-t\\right)^3+3x_2\\left(1-t\\right)^2t+3x_3\\left(1-t\\right)t^2+x_4t^3\\right),\\ y_1\\left(1-t\\right)^3+3y_2\\left(1-t\\right)^2t+3y_3\\left(1-t\\right)t^2+y_4t^3\\right)", color:"#000000"})
-			</script>
 		</div>
 	</div>
+	<div id="math_latex" class='row'>
+		$$
+	</div>
+	<script>
+	var latex_div = document.getElementById('math_latex');
+	var elt = document.getElementById('calculator');
+	var calculator = Desmos.Calculator(elt, {expressions: false, settingsMenu: false, zoomButtons: true, border: true});
+	calculator.setMathBounds({left: -10, right: 7200, bottom: -10, top: 3600});
+	{% for l in letters %}
+		{% for c in l %}
+			calculator.setExpression({latex:"{{c}}", color:"#000000"});
+			test = "{{c}}";
+			console.log(test)
+			test = test.replace(/\.[^\(|^t]*/g, "");
+			console.log(test)
+			latex_div.innerHTML = "$$" + test + "\\\\";
+		{% endfor %}
+	{% endfor %}
+	latex_div.innerHTML += "$$"
+	</script>
 </div>
