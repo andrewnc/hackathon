@@ -8,7 +8,8 @@ from .forms import NameForm
 def index(request):
 	return render(request, 'app/index.html')
 
-def drawT():
+def drawT(shift=None):
+	#TODO: Handle proper Shifting for characters
 	coords = [["237","620","237","620","237","120","237","120"],["237","120","237","35","226","24","143","19"],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 	li = []
 	for a in coords:
@@ -44,7 +45,7 @@ def getFormData(request):
 
     text = form['text_input'].value()
 
-    latexs = prepareLatex(text)
-    print(latexs[0][0])
-    print(latexs[0][1])
-    return render(request, 'app/name.html', {'text': text, 'latexs': latexs})
+    letters = prepareLatex(text)
+    #print(latexs[0][0])
+    #print(latexs[0][1])
+    return render(request, 'app/name.html', {'text': text, 'letters': letters})
