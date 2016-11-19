@@ -1,0 +1,17 @@
+.imdone/
+/lib/php/cdo
+*.swp
+tags
+.tags
+.tags1
+.tags2
+.gitignore
+/*.vsphpignore
+/*.suo
+/*.cache
+/*.phpproj
+/*.user
+/*.puo
+/*.sln
+test.sh
+/*.pyc
