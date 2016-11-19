@@ -21,7 +21,7 @@
 
 .main-label{
     text-align: right;
-    margin-bottom: 75px;
+    /*margin-bottom: 75px;*/
 }
 
 .off-label{
@@ -51,9 +51,9 @@
 
 <div class='container' style="padding-top:100px;">
 	<div class='row'>
-		<div class='col-md-3 col-md-offset-4'>
+		<div class='col-md-5 col-md-offset-3'>
 			<h2 class="main-label">Try Mathifying your name!</h2>
-			<form action="info/" method="post">
+			<form style="position:relative;left:25px;" action="info/" method="post">
 				{% csrf_token %}
 			    <input id="text_input" type="text" name="text_input" placeholder="Enter some text" class='form-control'>
 			    <input type="submit" value="OK" class="btn btn-primary moved">
@@ -62,9 +62,8 @@
 	</div>
     <div id="main" class='row'>
         <h2 class="off-label">Here's what "Math" looks like!</h2>
-        <div id="calculator" style="width: 800px; height: 400px;"></div>
+        <div id="calculator" class="col-md-5 col-md-offset-2" style="width: 800px; height: 400px;"></div>
         <div id="math_latex" class='row'>
-            <h2>Your text has been Mathified<span class="caret"></span></h2>
     	</div>
     	<script>
     	var main = document.getElementById('main');
