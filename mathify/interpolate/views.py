@@ -7,7 +7,8 @@ import math_letters as draw
 # Create your views here.
 
 def index(request):
-	return render(request, 'app/index.html')
+	letters = prepareLatex("Math")
+	return render(request, 'app/index.html', {'letters': letters})
 
 def landing_render(request):
 	return render(request, 'app/landing.html')
