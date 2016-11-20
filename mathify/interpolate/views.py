@@ -40,7 +40,7 @@ def getFormData(request):
 
     text = form['text_input'].value()
     sillify = form['silly'].value()
-    scrible = form['scrible'].value()
+    scribble = form['scribble'].value()
 
     letters = prepareLatex(text, sillify)
 
