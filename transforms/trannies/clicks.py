@@ -6,7 +6,9 @@ y = 0*x
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-ax.plot(x,y)
+plt.ylim([-100,1000])
+plt.xlim([-100,1000])
+ax.text(0.5, 0.5, 'U',fontsize=400)
 
 coords = []
 
@@ -25,7 +27,7 @@ def onclick(event):
     global coords
     coords.append((ix, iy))
 
-    if len(coords) == 4:
+    if len(coords) == 1000:
         fig.canvas.mpl_disconnect(cid)
         plt.close()
 
@@ -36,6 +38,8 @@ cid = fig.canvas.mpl_connect('button_press_event', onclick)
 plt.show()
 
 
-t = np.linspace(0,1,1000)
-plt.plot(x_of_t(coords[0],coords[1],coords[2],coords[3],t),y_of_t(coords[0],coords[1],coords[2],coords[3],t))
-plt.show()
+print coords
+
+# t = np.linspace(0,1,1000)
+# plt.plot(x_of_t(coords[0],coords[1],coords[2],coords[3],t),y_of_t(coords[0],coords[1],coords[2],coords[3],t))
+# plt.show()
