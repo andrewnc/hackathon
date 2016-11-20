@@ -53,7 +53,7 @@
 	<div class='row'>
 		<div class='col-md-5 col-md-offset-3'>
 			<h2 class="main-label">Try Mathifying your name!</h2>
-			<form style="position:relative;left:25px;" action="info/" method="post">
+			<form style="position:relative;left:25px;" action="/info/" method="post">
 				{% csrf_token %}
 			    <input id="text_input" type="text" pattern="[A-Za-z\s]{1,15}" maxlength='15' name="text_input" placeholder="Enter some text" class='form-control' title="No numbers or special characters please">
 			    <div class="pull-right"><label for="silly" style="padding-left:10px;padding-right:10px">sillifiy</label><input name="silly" id="silly" type="checkbox"></div>
