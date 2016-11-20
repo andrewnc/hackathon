@@ -6,6 +6,22 @@ def scale_coords(coords, x_scale, y_scale):
     np_coords = np.array(coords, dtype="float64")
     np_coords[:,::2] = np_coords[:,::2]*x_scale
     np_coords[:,1::2] = np_coords[:,1::2]*y_scale
+    final_x = np.max(np_coords[:,0::6])
+    final_y = np.max(np_coords[:,1::6])
+    return np_coords.tolist(), final_x, final_y
+
+def skew_coords(coords, x_factor, slope_factor):
+    np_coords = np.array(coords, dtype="float64")
+    np_coords[:,6] = np_coords[:,6] + x_factor
+    np_coords[:,2:4:] = np_coords[:,2:4:] + slope_factor
+    final_x = np.max(np_coords[:,0::6])
+    final_y = np.max(np_coords[:,1::6])
+    return np_coords.tolist(), final_x, final_y
+
+def skew_slopes(coords, x_factor, y_factor):
+    np_coords = np.array(coords, dtype="float64")
+    np_coords[:,2::4] = np_coords[:,2::4] + x_factor
+    np_coords[:,3:5:2] = np_coords[:,3:5:2] + y_factor
     final_x = np.max(np_coords[:,::2])
     final_y = np.max(np_coords[:,1::2])
     return np_coords.tolist(), final_x, final_y
@@ -36,7 +52,7 @@ def write_letter(coords, final_x, final_y):
             continue
     return li, final_x, final_y
 
-def char(c, x_shift, y_shift=0, silly=False):
+def char(c, x_shift, y_shift=0, silly=False, scribble=False):
     """NOTE: When building characters make sure that the coordinates are set up
     to have [x1,y1,x2,y2,x3,y3,x4,y4]
     Parameters:
@@ -55,68 +71,68 @@ def char(c, x_shift, y_shift=0, silly=False):
         x_scale = np.random.randint(25,250)/100.
         y_scale = np.random.randint(25,250)/100.
     if c == 'A':
-        return A(x_shift, y_shift, x_scale, y_scale)
+        return A(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'B':
-        return B(x_shift, y_shift, x_scale, y_scale)
+        return B(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'C':
-        return C(x_shift, y_shift, x_scale, y_scale)
+        return C(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'D':
-        return D(x_shift, y_shift, x_scale, y_scale)
+        return D(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'E':
-        return E(x_shift, y_shift, x_scale, y_scale)
+        return E(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'F':
-        return F(x_shift, y_shift, x_scale, y_scale)
+        return F(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'G':
-        return G(x_shift, y_shift, x_scale, y_scale)
+        return G(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'GG':
-        return G2(x_shift, y_shift, x_scale, y_scale)
+        return G2(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'H':
-        return H(x_shift, y_shift, x_scale, y_scale)
+        return H(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'I':
-        return I(x_shift, y_shift, x_scale, y_scale)
+        return I(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'J':
-        return J(x_shift, y_shift, x_scale, y_scale)
+        return J(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'K':
-        return K(x_shift, y_shift, x_scale, y_scale)
+        return K(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'L':
-        return L(x_shift, y_shift, x_scale, y_scale)
+        return L(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'M':
-        return M(x_shift, y_shift, x_scale, y_scale)
+        return M(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'N':
-        return N(x_shift, y_shift, x_scale, y_scale)
+        return N(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'O':
-        return O(x_shift, y_shift, x_scale, y_scale)
+        return O(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'P':
-        return P(x_shift, y_shift, x_scale, y_scale)
+        return P(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'Q':
-        return Q(x_shift, y_shift, x_scale, y_scale)
+        return Q(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'R':
-        return R(x_shift, y_shift, x_scale, y_scale)
+        return R(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'S':
-        return S(x_shift, y_shift, x_scale, y_scale)
+        return S(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'SS':
-        return S2(x_shift, y_shift, x_scale, y_scale)
+        return S2(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'T':
-        return T(x_shift, y_shift, x_scale, y_scale)
+        return T(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'U':
-        return U(x_shift, y_shift, x_scale, y_scale)
+        return U(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'V':
-        return V(x_shift, y_shift, x_scale, y_scale)
+        return V(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'W':
-        return W(x_shift, y_shift, x_scale, y_scale)
+        return W(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'X':
-        return X(x_shift, y_shift, x_scale, y_scale)
+        return X(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'Y':
-        return Y(x_shift, y_shift, x_scale, y_scale)
+        return Y(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == 'Z':
-        return Z(x_shift, y_shift, x_scale, y_scale)
+        return Z(x_shift, y_shift, x_scale, y_scale, scribble)
     elif c == ' ':
         x_shift += 150
         return None, x_shift, y_shift
     else:
         return None, x_shift, y_shift
 
-def template_letter(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def template_letter(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -125,6 +141,8 @@ def template_letter(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -135,12 +153,14 @@ def template_letter(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def A(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def A(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[0,0,260,700,0,0,260,700],[260,700,380,700,260,700,380,700],[380,700,635,0,380,700,635,0],[635,0,535,0,635,0,535,0],[535,0,455,200,535,0,455,200],[455,200,175,200,455,200,175,200],[175,200,100,0,175,200,100,0],[100,0,0,0,100,0,0,0],[211,300,322,600,211,300,322,600],[322,600,433,300,322,600,433,300],[211,300,422,300,211,300,422,300]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -151,7 +171,7 @@ def A(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def B(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def B(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -160,6 +180,8 @@ def B(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
     #Scale must occur before shift.
     x_shift -= 50
 
@@ -170,7 +192,7 @@ def B(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def C(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def C(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -179,6 +201,8 @@ def C(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
     x_shift -= 50
     #Scale must occur before shift.
     final_x += x_shift
@@ -189,7 +213,7 @@ def C(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def D(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def D(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -198,6 +222,8 @@ def D(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -208,12 +234,14 @@ def D(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def E(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def E(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[0,0,0,700,0,0,0,700],[0,700,450,700,0,700,450,700],[450,700,450,600,450,700,450,600],[450,600,100,600,450,600,100,600],[100,600,100,400,100,600,100,400],[100,400,400,400,100,400,400,400],[400,400,400,300,400,400,400,300],[400,300,100,300,400,300,100,300],[100,300,100,100,100,300,100,100],[100,100,450,100,100,100,450,100],[450,100,450,0,450,100,450,0],[450,0,0,0,450,0,0,0]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -224,12 +252,14 @@ def E(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def F(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def F(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[0,0,0,700,0,0,0,700],[0,700,450,700,0,700,450,700],[450,700,450,600,450,700,450,600],[450,600,100,600,450,600,100,600],[100,600,100,400,100,600,100,400],[100,400,300,400,100,400,300,400],[300,400,300,300,300,400,300,300],[300,300,100,300,300,300,100,300],[100,300,100,0,100,300,100,0],[100,0,0,0,100,0,0,0]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -241,7 +271,7 @@ def F(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     return write_letter(coords, final_x, final_y)
 
 #G Was split into two pieces in order to have the Latex properly render. so the Scale is fixated in a particularly odd manner.
-def G(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def G(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -255,6 +285,8 @@ def G(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     final_y = 915.395833333
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #G was split, so we don't want this first piece to mess us up
     #final_x += x_shift
@@ -266,7 +298,7 @@ def G(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     return write_letter(coords, x_shift, y_shift)
 
 #G Was split into two pieces in order to have the Latex properly render. so the Scale is fixated in a particularly odd manner.
-def G2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def G2(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -278,6 +310,8 @@ def G2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     final_y = 915.395833333
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -288,12 +322,15 @@ def G2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def H(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def H(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[0,0,0,700,0,0,0,700],[0,700,100,700,0,700,100,700],[100,700,100,400,100,700,100,400],[100,400,450,400,100,400,450,400],[450,400,450,700,450,400,450,700],[450,700,550,700,450,700,550,700],[550,700,550,0,550,700,550,0],[550,0,450,0,550,0,450,0],[450,0,450,300,450,0,450,300],[450,300,100,300,450,300,100,300],[100,300,100,0,100,300,100,0],[100,0,0,0,100,0,0,0]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
+
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -304,12 +341,14 @@ def H(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def I(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def I(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
     coords = [[0,0,0,100,0,0,0,100],[0,100,100,100,0,100,100,100],[100,100,100,600,100,100,100,600],[100,600,0,600,100,600,0,600],[0,600,0,700,0,600,0,700],[0,700,300,700,0,700,300,700],[300,700,300,600,300,700,300,600],[300,600,200,600,300,600,200,600],[200,600,200,100,200,600,200,100],[200,100,300,100,200,100,300,100],[300,100,300,0,300,100,300,0],[0,0,300,0,0,0,300,0]]
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -320,7 +359,7 @@ def I(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def J(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def J(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -329,6 +368,8 @@ def J(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -339,7 +380,7 @@ def J(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def K(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def K(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -348,6 +389,8 @@ def K(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -358,7 +401,7 @@ def K(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def L(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def L(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -367,6 +410,8 @@ def L(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -377,7 +422,7 @@ def L(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def M(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def M(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -386,7 +431,13 @@ def M(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
+
+    #coords, final_x, final_y = skew_slopes(coords, 25, 0)
+    #coords, final_x, final_y = skew_coords(coords, 0, 25)
+    #coords, final_x, final_y = skew_slopes(coords, 0, 25)
     #Scale must occur before shift.
     final_x += x_shift
     final_y += y_shift
@@ -395,7 +446,7 @@ def M(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords = shift_coords(x_shift, y_shift, coords)
     return write_letter(coords, final_x, final_y)
 
-def N(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def N(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -404,6 +455,8 @@ def N(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
     x_shift -= 25
     #Scale must occur before shift.
     final_x += x_shift
@@ -414,7 +467,7 @@ def N(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def O(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def O(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -423,6 +476,8 @@ def O(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -433,7 +488,7 @@ def O(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def P(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def P(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -442,6 +497,8 @@ def P(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -452,7 +509,7 @@ def P(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def Q(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def Q(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -461,6 +518,8 @@ def Q(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
     y_shift += 20
     #Scale must occur before shift.
     final_x += x_shift
@@ -471,7 +530,7 @@ def Q(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def R(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def R(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -480,6 +539,8 @@ def R(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
     x_shift -= 40
     #Scale must occur before shift.
     final_x += x_shift
@@ -491,7 +552,7 @@ def R(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     return write_letter(coords, final_x, final_y)
 
 #S Was split into two pieces in order to have the Latex properly render. so the Scale is fixated in a particularly odd manner.
-def S(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def S(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -502,6 +563,8 @@ def S(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     final_y = 934.11458333
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -513,7 +576,7 @@ def S(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     return write_letter(coords, final_x, final_y)
 
 #S Was split into two pieces in order to have the Latex properly render. so the Scale is fixated in a particularly odd manner.
-def S2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def S2(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -523,6 +586,8 @@ def S2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     final_y = 934.11458333
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -533,13 +598,15 @@ def S2(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def T(x_shift=0, y_shift=0, x_scale=1, y_scale=1):
+def T(x_shift=0, y_shift=0, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one."""
     coords = [[13.104838709677438, 805.2083333333333, 13.104838709677438, 911.1979166666665, 13.104838709677438, 796.6145833333333, 15.322580645161338, 908.3333333333333], [15.322580645161338, 908.3333333333333, 585.2822580645162, 908.3333333333333, 10.887096774193594, 914.0624999999998, 585.2822580645162, 911.1979166666665], [585.2822580645162, 911.1979166666665, 585.2822580645162, 799.4791666666665, 587.5, 905.4687499999998, 589.7177419354839, 796.6145833333333], [589.7177419354839, 796.6145833333333, 350.20161290322585, 799.4791666666665, 591.9354838709678, 799.4791666666665, 354.63709677419365, 802.34375], [354.63709677419365, 802.34375, 352.41935483870975, -5.468749999999972, 352.41935483870975, 799.4791666666665, 352.41935483870975, 5.989583333333371], [352.41935483870975, 5.989583333333371, 252.6209677419355, 11.718750000000028, 347.98387096774195, 11.718750000000028, 254.8387096774194, 5.989583333333371], [254.8387096774194, 5.989583333333371, 250.4032258064517, 799.4791666666665, 252.6209677419355, 5.989583333333371, 252.6209677419355, 796.6145833333333], [252.6209677419355, 796.6145833333333, 15.322580645161338, 805.2083333333333, 254.8387096774194, 799.4791666666665, 15.322580645161338, 799.4791666666665]]
     #To save time, we compute the scale in a semi-obfuscated manner.
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -550,7 +617,7 @@ def T(x_shift=0, y_shift=0, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def U(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def U(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -559,6 +626,8 @@ def U(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -569,7 +638,7 @@ def U(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def V(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def V(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -578,6 +647,8 @@ def V(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -588,7 +659,7 @@ def V(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def W(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def W(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -597,6 +668,8 @@ def W(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -607,7 +680,7 @@ def W(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def X(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def X(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -616,6 +689,8 @@ def X(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -626,7 +701,7 @@ def X(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def Y(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def Y(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -635,6 +710,8 @@ def Y(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
@@ -645,7 +722,7 @@ def Y(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
 
     return write_letter(coords, final_x, final_y)
 
-def Z(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
+def Z(x_shift=None, y_shift=None, x_scale=1, y_scale=1, scribble=False):
     """Prepare the Latex for a T, but also return the end character so we know where so start the next one.
     Recall that it goes [x1,y1,x2,y2,x3,y3,x4,y4], so each Bezier curve is a list inside coords.
     Also that the numbers are input as integers"""
@@ -654,6 +731,8 @@ def Z(x_shift=None, y_shift=None, x_scale=1, y_scale=1):
     coords, final_x, final_y = scale_coords(coords, 1, 1)
     coords, final_x, final_y = scale_coords(coords, 600./final_x, 700./final_y)
     coords, final_x, final_y = scale_coords(coords, x_scale, y_scale)
+    if scribble == True:
+        coords, final_x, final_y = skew_coords(coords, 10, 100)
 
     #Scale must occur before shift.
     final_x += x_shift
