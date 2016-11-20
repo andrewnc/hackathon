@@ -55,7 +55,7 @@
 			<h2 class="main-label">Try Mathifying your name!</h2>
 			<form style="position:relative;left:25px;" action="info/" method="post">
 				{% csrf_token %}
-			    <input id="text_input" type="text" pattern="[A-Za-z]{1,15}" maxlength='15' name="text_input" placeholder="Enter some text" class='form-control' title="No numbers or special characters please">
+			    <input id="text_input" type="text" pattern="[A-Za-z\s]{1,15}" maxlength='15' name="text_input" placeholder="Enter some text" class='form-control' title="No numbers or special characters please">
 			    <div class="pull-right"><label for="silly" style="padding-right:10px">sillifiy</label><input name="silly" id="silly" type="checkbox"></div>
 			    <input type="submit" value="GO" class="btn btn-primary moved">
 			</form>
@@ -83,7 +83,6 @@
             my_div.innerHTML += "$$";
             main.appendChild(my_div);
     	{% endfor %}
-    	latex_div.innerHTML += "$$"
     	</script>
     </div>
 </div>

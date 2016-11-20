@@ -9,6 +9,7 @@
 <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/databases-2/512/function-512.png">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <title>MATHIFY</title>
 </head>
 <nav class="navbar navbar-default">
@@ -29,13 +30,16 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<div id="loader" class="col-md-5 col-md-offset-4">
+        <h2><small>Please be patient while the equations load</small></h4>
+</div>
 
-<div class='container' style="padding-top:100px;">
+
+<div id="your-page" class='container' style="padding-top:100px;" style="display:none;">
 	<div id="main" class='row'>
 			<div id="calculator"  class="col-md-5 col-md-offset-2"  style="width: 800px; height: 400px;"></div>
-		<div id="math_latex" class='row'>
-		</div>
-	</div>
+			<div id="math_latex" class='row'>
+			</div>
 	<script>
 	var main = document.getElementById('main');
 	var elt = document.getElementById('calculator');
@@ -53,6 +57,13 @@
 		my_div.innerHTML += "$$";
 		main.appendChild(my_div);
 	{% endfor %}
-	latex_div.innerHTML += "$$"
 	</script>
 </div>
+</div>
+
+
+<script type="text/javascript">
+    $( "#loader" ).delay(2500).fadeOut(400, function(){
+    });  
+
+</script>
